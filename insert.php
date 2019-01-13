@@ -4,12 +4,14 @@ include("auth.php");
 $status = "";
 if(isset($_POST['new']) && $_POST['new']==1){
     $trn_date = date("Y-m-d H:i:s");
-    $name =$_REQUEST['name'];
-    $age = $_REQUEST['age'];
+    $marca =$_REQUEST['marca'];
+    $ano = $_REQUEST['ano'];
+    $precio = $_REQUEST['precio'];
+    $imagen = $_REQUEST['imagen'];
     $submittedby = $_SESSION["username"];
     $ins_query="insert into new_record
-    (`trn_date`,`name`,`age`,`submittedby`)values
-    ('$trn_date','$name','$age','$submittedby')";
+    (`trn_date`,`marca`,`ano`,`precio`,`imagen`,`submittedby`)values
+    ('$trn_date','$marca','$ano',`precio`,`imagen`,'$submittedby')";
     mysqli_query($con,$ins_query)
     or die(mysql_error());
     $status = "New Record Inserted Successfully.

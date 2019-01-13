@@ -1,6 +1,7 @@
 body {
      font-family:Arial, Sans-Serif;
 }
+
 .clearfix:before, .clearfix:after{
      content: "";
      display: table;

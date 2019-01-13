@@ -1,10 +1,43 @@
 <?php
 require('db.php');
 include("auth.php");
+$status = "";
+if(isset($_POST['new']) && $_POST['new']==1){
+    $trn_date = date("Y-m-d H:i:s");
+    $marca =$_REQUEST['marca'];
+    $ano = $_REQUEST['ano'];
+    $precio = $_REQUEST['precio'];
+    $imagen = $_POST['imagen'];
+    $submittedby = $_SESSION["username"];
+    $ins_query="insert into new_record
+    (`trn_date`,`marca`,`ano`,`precio`,`imagen`,`submittedby`)values
+    ('$trn_date','$marca','$ano','$precio','$imagen','$submittedby')";
+    mysqli_query($con,$ins_query)
+    or die(mysql_error());
+    $status = "New Record Inserted Successfully.
+    </br></br><a href='view.php'>View Inserted Record</a>";
+}
 ?>
+
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <!-- Required meta tags -->
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Añadir</title>
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,7 +61,7 @@ include("auth.php");
 </head>
 
 <body>
-<div class="dark-bg sticky-top">
+    <div class="dark-bg sticky-top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -60,7 +93,7 @@ include("auth.php");
                                         </div>
                                     </li>
                                 <li class="nav-item active">
-                                        <a class="nav-link" href="anadir.php">Añadir</a>
+                                        <a class="nav-link" href="\Login\Gestion\index.html">Añadir</a>
                                     </li>
                                 <<li class="nav-item">
                                         <a class="nav-link" href="#">Contacto</a>
@@ -74,87 +107,65 @@ include("auth.php");
             </div>
         </div>
     </div>
-<div class="col-md-5 responsive-wrap map-wrap">
-                    <div class="map-fix">
-                        <!-- Google Map Inicial  -->
-                        <div id="map" data-lat="40.37" data-lon="-3.917" data-zoom="12"></div>
-                    </div>
+                <div class="card-body">
+                    <form enctype="multipart/form-data" name="form" method="post" action=""> 
+                        <input type="hidden" name="new" value="1" />
+                        <div class="form-row">
+                            <div class="name">Marca - Modelo</div>
+                            <div class="value">
+                                <input class="input--style-6" type="text" name="marca"placeholder="Marca - Modelo" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Precio</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="text" name="precio" placeholder="Precio" required>
+                                </div>
+                            </div>
+                        </div>
+                      <div class="form-row">
+                            <div class="name">Año</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="text" name="ano" placeholder="Año" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Imagen</div>
+                            <div class="value">
+                                <div class="input-group js-input-file">
+                                    <input class="input-file" type="file" name="imagen" id="file">
+                                    <label class="label--file" for="file">Choose file</label>
+                                    <span class="input-file__info">No file chosen</span>
+                                </div>
+                                <div class="label--desc"></div>
+                            </div>
+                        </div>
+                        <button class="btn btn--radius-2 btn--blue-2" type="submit" value="Submit">Añadir</button>
+                
+                    </form>
+                    <p style="color:#FF0000;"><?php echo $status; ?></p>
+                </div>
 
-<div>
+                    
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
 
-<table width="138%" border="1" style="border-collapse:collapse;">
-<thead>
-<tr>
-<th><strong>Imagen</strong></th>
-<th><strong>Marca - Modelo</strong></th>
-<th><strong>Año</strong></th>
-<th><strong>Precio €</strong></th>
-<th><strong>Opciones</strong></th>
-</tr>
-</thead>
-<tbody>
-<?php
-$count=1;
-$sel_query="Select * from new_record ORDER BY id desc;";
-$result = mysqli_query($con,$sel_query);
-while($row = mysqli_fetch_assoc($result)) { ?>
 
-  
-
-<td align="center" height="25%" width="25%"><?php echo '<img height="100%" width="100%" src="data:image/jpeg;base64,'.base64_encode( $row['imagen'] ).'"/>'?></td>
-
-<td align="center"><?php echo $row["marca"]; ?></td>
-<td align="center"><?php echo $row["ano"]; ?></td>
-<td align="center"><?php echo $row["precio"]; ?></td>
-<td align="center">
-<a href="detail.html?id=<?php echo $row["id"]; ?>">View</a>
-<a href="delete.php?id=<?php echo $row["id"]; ?>">Ubicación</a>
-<a href="edit.php?id=<?php echo $row["id"]; ?>">Edit</a>
-<a href="delete.php?id=<?php echo $row["id"]; ?>">Delete</a>
-
-</td>
-</tr>
-<?php $count++; } ?>
-</tbody>
-</table>
-</div>
- <!-- jQuery, Bootstrap JS. -->
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+<!-- jQuery, Bootstrap JS. -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     </script>
-     <script>
-        $(".map-icon").click(function() {
-            $(".map-fix").toggle();
-        });
-    </script>
-    <script>
-        // Want to customize colors? go to snazzymaps.com
-        function myMap() {
-            var maplat = $('#map').data('lat');
-            var maplon = $('#map').data('lon');
-            var mapzoom = $('#map').data('zoom');
-            // Styles a map in night mode.
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: maplat,
-                    lng: maplon
-                },
-                zoom: mapzoom,
-                scrollwheel: false
-            });
-            var marker = new google.maps.Marker({
-                position: {
-                    lat: maplat,
-                    lng: maplon
-                },
-                map: map,
-                title: 'We are here!'
-            });
-        }
-    </script>
+     
     <!-- Map JS (Please change the API key below. Read documentation for more info) -->
     <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyAHBCfFYMdSzcBdmEDKui4LHKVG3T9Xdkg"></script>
 </body>
+
 </html>
+<!-- end document-->

@@ -1,6 +1,5 @@
 <?php
 require('db.php');
-include("auth.php");
 ?>
 <!DOCTYPE html>
 <head>
@@ -45,7 +44,7 @@ include("auth.php");
                      <span class="icon-arrow-down"></span>
                    </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="view.php">Ver Disponibles</a>
+                                            <a class="dropdown-item" href="vercoches.php">Ver Disponibles</a>
                                         </div>
                                     </li>
                                 <li class="nav-item dropdown">
@@ -59,13 +58,22 @@ include("auth.php");
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </li>
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ofertas
+                    <span class="icon-arrow-down"></span>
+                  </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="#">Ver Ofertas</a>
+                                        </div>
+                                    </li>
                                 <li class="nav-item active">
-                                        <a class="nav-link" href="anadir.php">Añadir</a>
+                                        <a class="nav-link" href="#">Sobre Nosotros</a>
                                     </li>
                                 <<li class="nav-item">
                                         <a class="nav-link" href="#">Contacto</a>
                                     </li>
-                                    <li><a href="logout.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Logout</a></li>
+                                    <li><a href="Login/login.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Login</a></li>
                                 </ul>
                             </ul>
                         </div>
@@ -108,10 +116,7 @@ while($row = mysqli_fetch_assoc($result)) { ?>
 <td align="center"><?php echo $row["precio"]; ?></td>
 <td align="center">
 <a href="detail.html?id=<?php echo $row["id"]; ?>">View</a>
-<a href="delete.php?id=<?php echo $row["id"]; ?>">Ubicación</a>
-<a href="edit.php?id=<?php echo $row["id"]; ?>">Edit</a>
-<a href="delete.php?id=<?php echo $row["id"]; ?>">Delete</a>
-
+<a href="id=<?php echo $row["id"]; ?>">Ubicación</a>
 </td>
 </tr>
 <?php $count++; } ?>

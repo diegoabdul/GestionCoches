@@ -49,7 +49,7 @@ session_start();
                      <span class="icon-arrow-down"></span>
                    </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Ver Disponibles</a>
+                                            <a class="dropdown-item" href="view.php">Ver Disponibles</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -65,7 +65,7 @@ session_start();
                                     </li>
                                     
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="\Login\Gestion\index.html">Añadir</a>
+                                        <a class="nav-link" href="anadir.php">Añadir</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Contacto</a>
