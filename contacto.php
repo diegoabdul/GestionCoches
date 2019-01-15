@@ -1,123 +1,140 @@
 <?php
-//include auth.php file on all secure pages
-include("auth.php");
+require('db.php');
 ?>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Bitcoin -- Nueva forma de dinero</title>
-   <a href="index.php">
-  <img class="BitcoinLogo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Bitcoin_logo.svg/2000px-Bitcoin_logo.svg.png" alt="BITCOIN" >
-</a>
-    
-  <link rel="stylesheet" type="text/css" href="bitcoin.css">
-  <div id="header">
-      <ul class="nav">
-        <li><a href="personal.php">Personal</a>
-        </li>
-        <li><a href="empresarial.php">Empresarial</a>
-        </li>
-        <li><a href="vivo.php">Precio en Vivo</a>
-        </li>
-        <li><a href="cripto.php">Explicación Criptográfica</a>
-        </li>
-        <li><a href="contacto.php">Contacto</a></li>
-        <li><a href="https://bitcoin.org/bitcoin.pdf">Paper</a></li>
-        <li><a href="logout.php">Logout</a></li>
-      </ul>
+<!DOCTYPE html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Colorlib">
+    <meta name="description" content="#">
+    <meta name="keywords" content="#">
+    <!-- Page Title -->
+    <title>Coches Caracas</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+    <!-- Simple line Icon -->
+    <link rel="stylesheet" href="css/simple-line-icons.css">
+    <!-- Themify Icon -->
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <!-- Hover Effects -->
+    <link rel="stylesheet" href="css/set1.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+ 
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+ 
+<link rel="stylesheet" href="styles.css" >
+ 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
+<body>
+<div class="dark-bg sticky-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="index.html">Coches Caracas</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="icon-menu"></span>
+            </button>
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Vehículos de Ocasión
+                     <span class="icon-arrow-down"></span>
+                   </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="vercoches.php">Ver Disponibles</a>
+                                        </div>
+                                    </li>
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Vehículos por Provincias
+                    <span class="icon-arrow-down"></span>
+                  </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </li>
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ofertas
+                    <span class="icon-arrow-down"></span>
+                  </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="#">Ver Ofertas</a>
+                                        </div>
+                                    </li>
+                                <li class="nav-item active">
+                                        <a class="nav-link" href="#">Sobre Nosotros</a>
+                                    </li>
+                                <<li class="nav-item">
+                                        <a class="nav-link" href="#">Contacto</a>
+                                    </li>
+                                    <li><a href="Login/login.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Login</a></li>
+                                </ul>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
-  </head>
-    <body>
-        <br clear="both">
-        <center><i>Contacte con Nosotros</i></center>
-        <br>
-        <br>
-        <br>
-    <form action="gracias.html" method="post">
-    <fieldset>
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" />
-        <br>
-        <br>
-    <label>Género:</label>
-    <label><input type="radio" name="genero" value="masculino"> Masculino</label>
-    <label><input type="radio" name="genero" value="femenino"> Femenino</label>
-    <br>
-    <br>
-    <label for="text">Fecha de Nacimiento</label>
-     <input type="date" min="12" max="100" id="age">
-    <br>
-    <br>
-        <label for="mail">E-mail:</label>
-        <input type="email" id="mail" name="email"required placeholder="@" />
-        <br>
-        <br>
-         <label for="tel">Teléfono Móvil</label>
-        <input type="number" id="telefono" name="telefono" />
-        <br>
-        <br>
-    </fieldset>
-    <fieldset>
-    <label>Contacto Referente a:</label>
-    <select name="entretenimiento">
-      <option>Personal</option>
-      <option>Empresarial</option>
-      <option>Precio</option>
-      <option>Explicación</option>
-      <option>Otros Temas</option>
-    </select>
-    <br>
-        <br>
-         <label for="mensaje">Mensaje: </label>
-        <input style="height: 100px " type="text" id="mensaje" name="mensaje" />
-    </fieldset>
-    <div class="button">
-        <br>
-        <center><button type="submit">Enviar</button>
-        </center>
-</audio> 
-</form>
- <footer>
-    <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"><a href="https://es.tradingview.com" rel="noopener" target="_blank"><span class="blue-text">Cotizaciones</span></a> por TradingView</div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-  {
-  "symbols": [
-    {
-      "title": "S&P 500",
-      "proName": "INDEX:SPX"
-    },
-    {
-      "title": "Nasdaq 100",
-      "proName": "INDEX:IUXX"
-    },
-    {
-      "title": "EUR/USD",
-      "proName": "FX_IDC:EURUSD"
-    },
-    {
-      "title": "BTC/USD",
-      "proName": "BITFINEX:BTCUSD"
-    },
-    {
-      "title": "ETH/USD",
-      "proName": "BITFINEX:ETHUSD"
-    },
-    {
-      "description": "BTC/EU",
-      "proName": "COINBASE:BTCEUR"
-    }
-  ],
-  "locale": "es"
-}
-  </script>
-</div>
-<!-- TradingView Widget END -->
-    <div class="footer">
-      Esta página ha sido creada por Diego Abdul, estudiante de la Universidad Europea de Madrid.
+
+
+      <form class="form-contact" method="POST">
+        <h2 class="form-contact-heading">Contact Us</h2>
+        <label for="inputName" class="sr-only">Name</label>
+          <input type="name" name="name" id="inputName" class="form-control" placeholder="Your Name" required>
+        <label for="inputEmail" class="sr-only">E-Mail</label>
+          <input type="email" name="email" id="inputEmail" class="form-control" placeholder="name@email.com" required>
+        <label for="inputSubject" class="sr-only">Subject</label>
+          <input type="name" name="subject" id="inputSubject" class="form-control" placeholder="Your Subject Line" required>
+        <label for="inputMessage" class="sr-only">Message</label>
+        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Send</button>
+      </form>
+      <?php
+      if((isset($_POST['name']) && !empty($_POST['name']))
+&& (isset($_POST['email']) && !empty($_POST['email']))
+&& (isset($_POST['subject']) && !empty($_POST['subject']))){
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $subject = $_POST['subject'];
+ 
+  
+  }
+?>
+
+
+<!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+<!-- jQuery, Bootstrap JS. -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    </script>
+     
+    <!-- Map JS (Please change the API key below. Read documentation for more info) -->
+    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyAHBCfFYMdSzcBdmEDKui4LHKVG3T9Xdkg"></script>
     </div>
-  </footer>
+  </form>
+</body>
   </html>

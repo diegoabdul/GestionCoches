@@ -1,3 +1,4 @@
+
 <?php
 require('db.php');
 include("auth.php");
@@ -7,17 +8,30 @@ if(isset($_POST['new']) && $_POST['new']==1){
     $marca =$_REQUEST['marca'];
     $ano = $_REQUEST['ano'];
     $precio = $_REQUEST['precio'];
-    $imagen = $_POST['imagen'];
+
+    if ($_FILES["file"]["error"] > 0) {
+    echo "Error: " . $_FILES["file"]["error"] . "<br />";
+}
+else {
+    echo "Subiste: " . $_FILES["file"]["name"] . "<br />";
+    echo "Tipo de archivo: " . $_FILES["file"]["type"] . "<br />";
+    echo "Tamaño: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
+    echo "Almacenado en: " . $_FILES["file"]["tmp_name"];
+    $contenidoImagen = file_get_contents($_FILES["file"]["tmp_name"]);
+    $imagenBase64 = addslashes($contenidoImagen);
+}
     $submittedby = $_SESSION["username"];
     $ins_query="insert into new_record
     (`trn_date`,`marca`,`ano`,`precio`,`imagen`,`submittedby`)values
-    ('$trn_date','$marca','$ano','$precio','$imagen','$submittedby')";
+    ('$trn_date','$marca','$ano','$precio','$imagenBase64','$submittedby')";
     mysqli_query($con,$ins_query)
     or die(mysql_error());
     $status = "New Record Inserted Successfully.
     </br></br><a href='view.php'>View Inserted Record</a>";
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -136,14 +150,12 @@ if(isset($_POST['new']) && $_POST['new']==1){
                             <div class="name">Imagen</div>
                             <div class="value">
                                 <div class="input-group js-input-file">
-                                    <input class="input-file" type="file" name="imagen" id="file">
-                                    <label class="label--file" for="file">Choose file</label>
-                                    <span class="input-file__info">No file chosen</span>
+                                    <input type="file" name="file" id="file"/><br><br>
                                 </div>
                                 <div class="label--desc"></div>
                             </div>
                         </div>
-                        <button class="btn btn--radius-2 btn--blue-2" type="submit" value="Submit">Añadir</button>
+                        <button class="btn btn--radius-2 btn--blue-2" type="submit" value="Upload">Añadir</button>
                 
                     </form>
                     <p style="color:#FF0000;"><?php echo $status; ?></p>
