@@ -38,11 +38,13 @@ if (isset($_REQUEST['username'])){
     $username = mysqli_real_escape_string($con,$username); 
     $email = stripslashes($_REQUEST['email']);
     $email = mysqli_real_escape_string($con,$email);
+	$telefono = stripslashes($_REQUEST['telefono']);
+    $telefono = mysqli_real_escape_string($con,$telefono);
     $password = stripslashes($_REQUEST['password']);
     $password = mysqli_real_escape_string($con,$password);
     $trn_date = date("Y-m-d H:i:s");
-        $query = "INSERT into `users` (username, password, email, trn_date)
-VALUES ('$username', '".md5($password)."', '$email', '$trn_date')";
+        $query = "INSERT into `users` (username, password, email,telefono, trn_date)
+VALUES ('$username', '".md5($password)."', '$email','$telefono', '$trn_date')";
         $result = mysqli_query($con,$query);
         if($result){
             echo "<div class='form'>
@@ -69,6 +71,10 @@ VALUES ('$username', '".md5($password)."', '$email', '$trn_date')";
                     </div>
                         <div class="wrap-input100 validate-input" data-validate = "Username">
                        <input type="email" name="email" placeholder="Email" required />
+                        
+                    </div>
+					 <div class="wrap-input100 validate-input" data-validate = "Telefono">
+                        <input type="int" name="telefono" placeholder="Telefono" required />
                         
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
