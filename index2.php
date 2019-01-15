@@ -68,7 +68,7 @@ session_start();
                                         <a class="nav-link" href="anadir.php">Añadir</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="contacto.php">Contacto</a>
+                                        <a class="nav-link" href="#">Contacto</a>
                                     </li>
                                     <li><a href="logout.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Logout</a></li>
                                 </ul>
