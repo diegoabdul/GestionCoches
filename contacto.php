@@ -1,9 +1,46 @@
+
 <?php
 require('db.php');
+include("auth.php");
+$status = "";
+if(isset($_POST['new']) && $_POST['new']==1){
+    $trn_date = date("Y-m-d H:i:s");
+    $name =$_REQUEST['name'];
+    $email = $_REQUEST['email'];
+    $subject = $_REQUEST['subject'];
+    $message = $_REQUEST['message'];
+
+    $ins_query="insert into contact
+    (`time`,`name`,`email`,`subject`,`message`)values
+    ('$trn_date','$name','$email','$subject','$message')";
+    mysqli_query($con,$ins_query)
+    or die(mysql_error());
+    $status = "New Record Inserted Successfully.
+    </br></br><a href='view.php'>View Inserted Record</a>";
+}
 ?>
+
+
+
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <!-- Required meta tags -->
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Añadir</title>
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,20 +61,10 @@ require('db.php');
     <link rel="stylesheet" href="css/set1.css">
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
- 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
- 
-<link rel="stylesheet" href="styles.css" >
- 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div class="dark-bg sticky-top">
+    <div class="dark-bg sticky-top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -54,7 +81,7 @@ require('db.php');
                      <span class="icon-arrow-down"></span>
                    </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="vercoches.php">Ver Disponibles</a>
+                                            <a class="dropdown-item" href="view.php">Ver Disponibles</a>
                                         </div>
                                     </li>
                                 <li class="nav-item dropdown">
@@ -68,22 +95,13 @@ require('db.php');
                                             <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </li>
-                                <li class="nav-item dropdown">
-                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Ofertas
-                    <span class="icon-arrow-down"></span>
-                  </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Ver Ofertas</a>
-                                        </div>
-                                    </li>
                                 <li class="nav-item active">
-                                        <a class="nav-link" href="#">Sobre Nosotros</a>
+                                        <a class="nav-link" href="\Login\Gestion\index.html">Añadir</a>
                                     </li>
                                 <<li class="nav-item">
                                         <a class="nav-link" href="#">Contacto</a>
                                     </li>
-                                    <li><a href="Login/login.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Login</a></li>
+                                    <li><a href="logout.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Logout</a></li>
                                 </ul>
                             </ul>
                         </div>
@@ -92,34 +110,46 @@ require('db.php');
             </div>
         </div>
     </div>
+                <div class="card-body">
+                    <form enctype="multipart/form-data" name="form" method="post" action=""> 
+                        <input type="hidden" name="new" value="1" />
+                        <div class="form-row">
+                            <div class="name">Nombre</div>
+                            <div class="value">
+                                <input class="input--style-6" type="text" name="name"placeholder="Nombre" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Email</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="text" name="email" placeholder="Email@" required>
+                                </div>
+                            </div>
+                        </div>
+                      <div class="form-row">
+                            <div class="name">Asunto</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="text" name="subject" placeholder="Asunto de la Consulta" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Mensaje</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="text" name="message" placeholder="Escriba su consulta, especificando el coche que le gusta" required>
+                                </div>
+                        </div>
+                        <button class="btn btn--radius-2 btn--blue-2" type="submit" value="Upload">Enviar</button>
+                
+                    </form>
+                    <p style="color:#FF0000;"><?php echo $status; ?></p>
+                </div>
 
-
-      <form class="form-contact" method="POST">
-        <h2 class="form-contact-heading">Contact Us</h2>
-        <label for="inputName" class="sr-only">Name</label>
-          <input type="name" name="name" id="inputName" class="form-control" placeholder="Your Name" required>
-        <label for="inputEmail" class="sr-only">E-Mail</label>
-          <input type="email" name="email" id="inputEmail" class="form-control" placeholder="name@email.com" required>
-        <label for="inputSubject" class="sr-only">Subject</label>
-          <input type="name" name="subject" id="inputSubject" class="form-control" placeholder="Your Subject Line" required>
-        <label for="inputMessage" class="sr-only">Message</label>
-        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Send</button>
-      </form>
-      <?php
-      if((isset($_POST['name']) && !empty($_POST['name']))
-&& (isset($_POST['email']) && !empty($_POST['email']))
-&& (isset($_POST['subject']) && !empty($_POST['subject']))){
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $subject = $_POST['subject'];
- 
-  
-  }
-?>
-
-
-<!-- Jquery JS-->
+                    
+    <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
 
 
@@ -134,7 +164,7 @@ require('db.php');
      
     <!-- Map JS (Please change the API key below. Read documentation for more info) -->
     <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyAHBCfFYMdSzcBdmEDKui4LHKVG3T9Xdkg"></script>
-    </div>
-  </form>
 </body>
-  </html>
+
+</html>
+<!-- end document-->
