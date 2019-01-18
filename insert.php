@@ -5,14 +5,14 @@ $status = "";
 if(isset($_POST['new']) && $_POST['new']==1){
     $trn_date = date("Y-m-d H:i:s");
     $marca =$_REQUEST['marca'];
+	$descripcion=$_REQUEST['descripcion'];
     $ano = $_REQUEST['ano'];
     $precio = $_REQUEST['precio'];
     $imagen = $_REQUEST['imagen'];
-	 $descripcion = $_REQUEST['descripcion'];
     $submittedby = $_SESSION["username"];
     $ins_query="insert into new_record
-    (`trn_date`,`marca`,`ano`,`precio`,`imagen`,`descripcion`,`submittedby`)values
-    ('$trn_date','$marca','$ano',`precio`,`imagen`,`descripcion`,'$submittedby')";
+    (`trn_date`,`marca`,`descripcion`,`ano`,`precio`,`imagen`,`submittedby`)values
+    ('$trn_date','$marca',`$descripcion`,'$ano',`precio`,`imagen`,'$submittedby')";
     mysqli_query($con,$ins_query)
     or die(mysql_error());
     $status = "New Record Inserted Successfully.

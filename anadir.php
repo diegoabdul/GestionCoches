@@ -6,9 +6,9 @@ $status = "";
 if(isset($_POST['new']) && $_POST['new']==1){
     $trn_date = date("Y-m-d H:i:s");
     $marca =$_REQUEST['marca'];
+	$descripcion =$_REQUEST['descripcion'];
     $ano = $_REQUEST['ano'];
     $precio = $_REQUEST['precio'];
-	$descripcion = $_REQUEST['descripcion']
 
     if ($_FILES["file"]["error"] > 0) {
     echo "Error: " . $_FILES["file"]["error"] . "<br />";
@@ -23,8 +23,8 @@ else {
 }
     $submittedby = $_SESSION["username"];
     $ins_query="insert into new_record
-    (`trn_date`,`marca`,`ano`,`precio`,`imagen`,`descripcion`,`submittedby`)values
-    ('$trn_date','$marca','$ano','$precio','&descripcion','$imagenBase64','$submittedby')";
+    (`trn_date`,`marca`,`descripcion`,`ano`,`precio`,`imagen`,`submittedby`)values
+    ('$trn_date','$marca','$descripcion','$ano','$precio','$imagenBase64','$submittedby')";
     mysqli_query($con,$ins_query)
     or die(mysql_error());
     $status = "New Record Inserted Successfully.
@@ -131,6 +131,14 @@ else {
                                 <input class="input--style-6" type="text" name="marca"placeholder="Marca - Modelo" required>
                             </div>
                         </div>
+						<div class="form-row">
+                            <div class="name">Descripcion</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="text" name="descripcion" placeholder="Descripcion" required>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="name">Precio</div>
                             <div class="value">
@@ -144,14 +152,6 @@ else {
                             <div class="value">
                                 <div class="input-group">
                                     <input class="input--style-6" type="text" name="ano" placeholder="Año" required>
-                                </div>
-                            </div>
-                        </div>
-						<div class="form-row">
-                            <div class="name">Descripcion</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-6" type="text" name="descripcion" placeholder="Descripcion" required>
                                 </div>
                             </div>
                         </div>
@@ -173,6 +173,7 @@ else {
                     
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
+
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
