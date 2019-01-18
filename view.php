@@ -109,7 +109,7 @@ while($row = mysqli_fetch_assoc($result)) { ?>
 <td align="center">
 <a href="detail.html?id=<?php echo $row["id"]; ?>">View</a>
 <a href="delete.php?id=<?php echo $row["id"]; ?>">Ubicación</a>
-<a href="edit.php?id=<?php echo $row["id"]; ?>">Edit</a>
+<a href="editar.php?id=<?php echo $row["id"]; ?>">Edit</a>
 <a href="delete.php?id=<?php echo $row["id"]; ?>">Delete</a>
 
 </td>

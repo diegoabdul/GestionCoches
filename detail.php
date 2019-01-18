@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+require('db.php');
+$id=$_REQUEST['id'];
+$query = "SELECT * from new_record where id='".$id."'"; 
+$result = mysqli_query($con, $query) or die ( mysqli_error());
+$row = mysqli_fetch_assoc($result);
+?>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -75,30 +81,9 @@
     <!--============================= BOOKING =============================-->
     <div>
         <!-- Swiper -->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide">
-                    <a href="images/reserve-slide2.jpg" class="grid image-link">
-                        <img src="images/reserve-slide2.jpg" class="img-fluid" alt="#">
-                    </a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="images/reserve-slide1.jpg" class="grid image-link">
-                        <img src="images/reserve-slide1.jpg" class="img-fluid" alt="#">
-                    </a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="images/reserve-slide3.jpg" class="grid image-link">
-                        <img src="images/reserve-slide3.jpg" class="img-fluid" alt="#">
-                    </a>
-                </div>     
-            </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination swiper-pagination-white"></div>
-            <!-- Add Arrows -->
-            <div class="swiper-button-next swiper-button-white"></div>
-            <div class="swiper-button-prev swiper-button-white"></div>
+        <div style="background-color: black;">
+            <div align="center">
+            <td align="center" height="100%" width="100%"><?php echo '<img height="25%" width="45%" src="data:image/jpeg;base64,'.base64_encode( $row['imagen'] ).'"/>'?></td>
         </div>
     </div>
     <!--//END BOOKING -->
@@ -107,22 +92,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <?php
                     <td align="center"><?php echo $row["marca"]; ?></td>
-                    ?>
+                    <br>
+                    <td align="center"><?php echo $row["ano"]; ?></td>
                     <p><span>$$$</span>$$</p>
                 </div>
                 <div class="col-md-6">
                     <div class="reserve-seat-block">
                         <div class="reserve-rating">
-                            <span>9.5</span>
+                            <span><td align="center"><?php echo $row["precio"]; ?></td></span>
+                            <font color="white">€</font>
                         </div>
                        
-                        <div class="reserve-btn">
-                            <div class="featured-btn-wrap">
-                                <a href="#" class="btn btn-danger">¿Te gusta?<br>Contactanos</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -136,8 +117,7 @@
                 <div class="col-md-8 responsive-wrap">
                     <div class="booking-checkbox_wrap">
                         <div class="booking-checkbox">
-                            <p>Aqui la descripcion del coche</p>
-                            <p>Aqui la descripcion del coche</p>
+                             <td align="center"><?php echo $row["descripcion"]; ?>
                             <hr>
                         </div>
                         <div class="row">

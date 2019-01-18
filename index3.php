@@ -71,7 +71,7 @@ require('db.php');
                                         <a class="nav-link" href="#">Sobre Nosotros</a>
                                     </li>
                                 <<li class="nav-item">
-                                        <a class="nav-link" href="#">Contacto</a>
+                                        <a class="nav-link" href="">Contacto</a>
                                     </li>
                                     <li><a href="Login/login.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Login</a></li>
                                 </ul>
@@ -107,6 +107,7 @@ $sel_query="Select * from new_record ORDER BY id desc;";
 $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) { ?>
 
+  
 
 <td align="center" height="25%" width="25%"><?php echo '<img height="100%" width="100%" src="data:image/jpeg;base64,'.base64_encode( $row['imagen'] ).'"/>'?></td>
 
@@ -114,7 +115,7 @@ while($row = mysqli_fetch_assoc($result)) { ?>
 <td align="center"><?php echo $row["ano"]; ?></td>
 <td align="center"><?php echo $row["precio"]; ?></td>
 <td align="center">
-<a href="detail.php?id=<?php echo $row["id"]; ?>">View</a>
+<a href="detail.html?id=<?php echo $row["id"]; ?>">View</a>
 <a href="id=<?php echo $row["id"]; ?>">Ubicación</a>
 </td>
 </tr>
@@ -128,37 +129,49 @@ while($row = mysqli_fetch_assoc($result)) { ?>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     </script>
-     <script>
-        $(".map-icon").click(function() {
-            $(".map-fix").toggle();
-        });
-    </script>
-    <script>
-        // Want to customize colors? go to snazzymaps.com
-        function myMap() {
-            var maplat = $('#map').data('lat');
-            var maplon = $('#map').data('lon');
-            var mapzoom = $('#map').data('zoom');
-            // Styles a map in night mode.
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: maplat,
-                    lng: maplon
-                },
-                zoom: mapzoom,
-                scrollwheel: false
-            });
-            var marker = new google.maps.Marker({
-                position: {
-                    lat: maplat,
-                    lng: maplon
-                },
-                map: map,
-                title: 'We are here!'
-            });
-        }
-    </script>
-    <!-- Map JS (Please change the API key below. Read documentation for more info) -->
-    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyAHBCfFYMdSzcBdmEDKui4LHKVG3T9Xdkg"></script>
+     
+         <meta charset="UTF-8">
+    
+    <!-- Librerías para usar Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+    crossorigin=""></script>
+
+    <!-- Librerías para usar Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Librerías propias -->
+    <link rel="stylesheet" href="estilo.css">
+    <script src="scripts.js"></script>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <div id="map"></div>
+      </div>
+      <div class="col-sm-4">
+       
+        <form>
+            <input type="text" id="Latitud"> Latitud<br>
+            <input type="text" id="Longitud"> Longitud<br>
+            <input type="button" value="Guardar" id="Guardar">      
+        </form>
+        
+        <br>
+    
+        <div id="tabla"> </div>
+
+      </div>
+    </div>
+
+
+
+
 </body>
 </html>
