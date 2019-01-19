@@ -26,10 +26,6 @@
 </head>
 
 <body>
-    <?php
-require('db.php');
-session_start();
-    ?>
     <!--============================= HEADER =============================-->
     <div class="nav-menu">
         <div class="bg transition">
@@ -37,7 +33,7 @@ session_start();
                 <div class="row">
                     <div class="col-md-12">
                         <nav class="navbar navbar-expand-lg navbar-light">
-                            <a class="navbar-brand" href="index2.php">Coches Caracas</a>
+                            <a class="navbar-brand" href="index.php">Coches Caracas</a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="icon-menu"></span>
               </button>
@@ -49,20 +45,18 @@ session_start();
                      <span class="icon-arrow-down"></span>
                    </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="view.php">Ver Disponibles</a>
+                                            <a class="dropdown-item" href="vercoches.php?id=<?php echo '0' ?>">Ver Disponibles</a>
                                         </div>
                                     </li>
+                                   
                                     
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="anadir.php">Añadir</a>
+                                        <a class="nav-link" href="nosotros.php">Sobre Nosotros</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="mensajes.php">Ver Mensajes</a>
+                                        <a class="nav-link" href="contacto.php">Contacto</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/Login/registration.php">Registro Nuevo Usuario</a>
-                                    </li>
-                                    <li><a href="logout.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Logout</a></li>
+                                    <li><a href="Login/login.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Login Gestión</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -94,9 +88,7 @@ session_start();
             </div>
         </div>
     </section>
-    <!--// SLIDER -->
-    <!--//END HEADER -->
-    <!--============================= FOOTER =============================-->
+    
     <footer class="main-block dark-bg">
         <div class="container">
             <div class="row">

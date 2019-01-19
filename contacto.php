@@ -24,16 +24,6 @@ require('db.php');
     <link rel="stylesheet" href="css/set1.css">
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
- 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
- 
-<link rel="stylesheet" href="styles.css" >
- 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -42,7 +32,7 @@ require('db.php');
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">Coches Caracas</a>
+                        <a class="navbar-brand" href="index.php">Coches Caracas</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="icon-menu"></span>
             </button>
@@ -54,34 +44,16 @@ require('db.php');
                      <span class="icon-arrow-down"></span>
                    </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="vercoches.php">Ver Disponibles</a>
+                                            <a class="dropdown-item" href="vercoches.php?id=<?php echo '0' ?>">Ver Disponibles</a>
                                         </div>
                                     </li>
-                                <li class="nav-item dropdown">
-                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Vehículos por Provincias
-                    <span class="icon-arrow-down"></span>
-                  </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </li>
-                                <li class="nav-item dropdown">
-                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Ofertas
-                    <span class="icon-arrow-down"></span>
-                  </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Ver Ofertas</a>
-                                        </div>
-                                    </li>
+                                
+                                
                                 <li class="nav-item active">
-                                        <a class="nav-link" href="#">Sobre Nosotros</a>
+                                        <a class="nav-link" href="nosotros.php">Sobre Nosotros</a>
                                     </li>
                                 <<li class="nav-item">
-                                        <a class="nav-link" href="#">Contacto</a>
+                                        <a class="nav-link" href="contacto.php">Contacto</a>
                                     </li>
                                     <li><a href="Login/login.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Login</a></li>
                                 </ul>
@@ -93,19 +65,20 @@ require('db.php');
         </div>
     </div>
 
-
-      <form class="form-contact" method="POST">
-        <h2 class="form-contact-heading">Contact Us</h2>
+        <div class="card-body">
+      <form class="card-body" method="POST">
+        <h2 class="form-row">Contacta con Coches Caracas</h2>
         <label for="inputName" class="sr-only">Name</label>
-          <input type="name" name="name" id="inputName" class="form-control" placeholder="Your Name" required>
+          <input type="name" name="name" id="inputName" class="form-control" placeholder="Nombre" required>
         <label for="inputEmail" class="sr-only">E-Mail</label>
-          <input type="email" name="email" id="inputEmail" class="form-control" placeholder="name@email.com" required>
+          <input type="email" name="email" id="inputEmail" class="form-control" placeholder="nombre@email.com" required>
         <label for="inputSubject" class="sr-only">Subject</label>
-          <input type="name" name="subject" id="inputSubject" class="form-control" placeholder="Your Subject Line" required>
-        <label for="inputMessage" class="sr-only">Message</label>
-        <textarea class="form-control" id="inputMessage" rows="3"></textarea>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Send</button>
+          <input type="name" name="subject" id="inputSubject" class="form-control" placeholder="Asunto" required>
+        <label for="inputMessage" class="sr-only" >Message</label>
+        <textarea class="form-control" id="inputMessage" rows="3"placeholder="Introduzca su mensaje, si le gusto algun coche indique tambien el modelo."></textarea>
+        <button class="btn" type="submit">Enviar</button>
       </form>
+      </div>
       <?php
       if((isset($_POST['name']) && !empty($_POST['name']))
 && (isset($_POST['email']) && !empty($_POST['email']))

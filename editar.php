@@ -50,7 +50,7 @@ else {
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Añadir</title>
+    <title>Editar</title>
 
     <!-- Font special for pages-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
@@ -85,7 +85,7 @@ else {
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html">Coches Caracas</a>
+                        <a class="navbar-brand" href="index2.php">Coches Caracas</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="icon-menu"></span>
             </button>
@@ -100,22 +100,11 @@ else {
                                             <a class="dropdown-item" href="view.php">Ver Disponibles</a>
                                         </div>
                                     </li>
-                                <li class="nav-item dropdown">
-                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Vehículos por Provincias
-                    <span class="icon-arrow-down"></span>
-                  </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </li>
                                 <li class="nav-item active">
-                                        <a class="nav-link" href="\Login\Gestion\index.html">Añadir</a>
+                                        <a class="nav-link" href="anadir.php">Añadir</a>
                                     </li>
                                 <<li class="nav-item">
-                                        <a class="nav-link" href="#">Contacto</a>
+                                       <a class="nav-link" href="mensajes.php">Ver Mensajes</a>
                                     </li>
                                     <li><a href="logout.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Logout</a></li>
                                 </ul>

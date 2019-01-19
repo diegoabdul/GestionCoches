@@ -88,16 +88,6 @@ and password='".md5($password)."'";
 							</button>
 						</div>
 					</div>
-
-					<div class="text-center p-t-115">
-						<span class="txt1">
-							Si no tiene cuenta,
-						</span>
-
-						<a class="txt2" href="#">
-							<a href='registration.php'>Registrese acá</a></p>
-						</a>
-					</div>
 				</form>
 			</div>
 		</div>

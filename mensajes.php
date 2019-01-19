@@ -1,13 +1,6 @@
 <?php
 require('db.php');
-?>
-
-<?php
-require('db.php');
-$id=$_REQUEST['id'];
-$query = "SELECT ubicacion from new_record where id='".$id."'"; 
-$result = mysqli_query($con, $query) or die ( mysqli_error());
-$row2 = mysqli_fetch_assoc($result);
+include("auth.php");
 ?>
 <!DOCTYPE html>
 <head>
@@ -40,7 +33,7 @@ $row2 = mysqli_fetch_assoc($result);
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.php">Coches Caracas</a>
+                        <a class="navbar-brand" href="index2.php">Coches Caracas</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="icon-menu"></span>
             </button>
@@ -52,18 +45,16 @@ $row2 = mysqli_fetch_assoc($result);
                      <span class="icon-arrow-down"></span>
                    </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="vercoches.php?id=<?php echo '0' ?>">Ver Disponibles</a>
+                                            <a class="dropdown-item" href="view.php">Ver Disponibles</a>
                                         </div>
                                     </li>
-                                
-                                
                                 <li class="nav-item active">
-                                        <a class="nav-link" href="nosotros.php">Sobre Nosotros</a>
+                                        <a class="nav-link" href="anadir.php">Añadir</a>
                                     </li>
                                 <<li class="nav-item">
-                                        <a class="nav-link" href="contacto.php">Contacto</a>
+                                        <a class="nav-link" href="mensajes.php">Ver Mensajes</a>
                                     </li>
-                                    <li><a href="Login/login.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Login</a></li>
+                                    <li><a href="logout.php" class="btn btn-outline-light top-btn"><span class="ti-plus"></span>Logout</a></li>
                                 </ul>
                             </ul>
                         </div>
@@ -72,47 +63,43 @@ $row2 = mysqli_fetch_assoc($result);
             </div>
         </div>
     </div>
-<div style="width: 55%" style="height: 50%">
-                    <div class="map-fix">                
- <iframe src="https://www.google.com/maps/embed?pb=<?php echo $row2["ubicacion"]; ?>" width="95%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    </div>
+<div style="width: 75%" style="height: 50%">
+                    
 
 <div class="table-responsive">
 
 <table class="table table-striped">
 <thead>
 <tr>
-<th><strong>Imagen</strong></th>
-<th><strong>Marca - Modelo</strong></th>
-<th><strong>Año</strong></th>
-<th><strong>Precio €</strong></th>
+<th><strong>Nombre</strong></th>
+<th><strong>Email</strong></th>
+<th><strong>Telefono</strong></th>
+<th><strong>Asunto</strong></th>
+<th><strong>Mensaje</strong></th>
 <th><strong>Opciones</strong></th>
 </tr>
 </thead>
 <tbody>
 <?php
 $count=1;
-$sel_query="Select * from new_record ORDER BY id desc;";
+$sel_query="Select * from contact ORDER BY id desc;";
 $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) { ?>
 
-
-<td align="center" height="25%" width="25%"><?php echo '<img height="100%" width="100%" src="data:image/jpeg;base64,'.base64_encode( $row['imagen'] ).'"/>'?></td>
-
-<td align="center"><?php echo $row["marca"]; ?></td>
-<td align="center"><?php echo $row["ano"]; ?></td>
-<td align="center"><?php echo $row["precio"]; ?></td>
+<td align="center"><?php echo $row["name"]; ?></td>
+<td align="center"><?php echo $row["email"]; ?></td>
+<td align="center"><?php echo $row["telefono"]; ?></td>
+<td align="center"><?php echo $row["subject"]; ?></td>
+<td align="center"><?php echo $row["message"]; ?></td>
 <td align="center">
-<a href="detail.php?id=<?php echo $row["id"]; ?>">View</a>
-<a href="vercoches.php?id=<?php echo $row["id"]; ?>">Ubicación</a>
+<a href="delete1.php?id=<?php echo $row["id"]; ?>">Delete</a>
+
 </td>
 </tr>
 <?php $count++; } ?>
 </tbody>
 </table>
-
 </div>
-
  <!-- jQuery, Bootstrap JS. -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -149,7 +136,7 @@ while($row = mysqli_fetch_assoc($result)) { ?>
             });
         }
     </script>
-
-   
+    <!-- Map JS (Please change the API key below. Read documentation for more info) -->
+    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyAHBCfFYMdSzcBdmEDKui4LHKVG3T9Xdkg"></script>
 </body>
 </html>
