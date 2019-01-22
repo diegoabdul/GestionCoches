@@ -35,6 +35,21 @@ $row = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/magnific-popup.css">
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+     <!-- Librerías para usar Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+    crossorigin=""></script>
+
+    <!-- Librerías para usar Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Librerías propias -->  
+    <script src="scripts.js"></script>
 </head>
 
 <body>
@@ -75,8 +90,7 @@ $row = mysqli_fetch_assoc($result);
             </div>
         </div>
     </div>
-    <!--//END HEADER -->
-    <!--============================= BOOKING =============================-->
+
     <div>
         <!-- Swiper -->
         <div style="background-color: black;">
@@ -84,8 +98,7 @@ $row = mysqli_fetch_assoc($result);
             <td align="center" height="100%" width="100%"><?php echo '<img height="25%" width="45%" src="data:image/jpeg;base64,'.base64_encode( $row['imagen'] ).'"/>'?></td>
         </div>
     </div>
-    <!--//END BOOKING -->
-    <!--============================= RESERVE A SEAT =============================-->
+
     <section class="reserve-block">
         <div class="container">
             <div class="row">
@@ -93,7 +106,19 @@ $row = mysqli_fetch_assoc($result);
                     <td align="center"><?php echo $row["marca"]; ?></td>
                     <br>
                     <td align="center"><?php echo $row["ano"]; ?></td>
-                    <p><span>$$$</span>$$</p>
+                    <?php 
+                    $otro= $row["precio"];
+                    ?>
+                    <?php if($otro>50000) : ?>
+                               <p><span>$$$$$</span></p>
+                            <?php elseif($otro>34999 and $otro<50000) : ?>
+                                <p><span>$$$$</span>$</p>
+                            <?php elseif($otro>19500 and $otro<34999) : ?>
+                                <p><span>$$$</span>$$</p>
+                            <?php else : ?>
+                                <p><span>$$</span>$$$</p>
+                            <?php endif; ?>
+                             
                 </div>
                 <div class="col-md-6">
                     <div class="reserve-seat-block">
@@ -107,76 +132,28 @@ $row = mysqli_fetch_assoc($result);
             </div>
         </div>
     </section>
-    <!--//END RESERVE A SEAT -->
-    <!--============================= BOOKING DETAILS =============================-->
+
     <section class="light-bg booking-details_wrap">
         <div class="container">
             <div class="row">
+                
                 <div class="col-md-8 responsive-wrap">
+                     <div id="map"></div>
+                 </div>
+                
                     <div class="booking-checkbox_wrap">
                         <div class="booking-checkbox">
-                             <td align="center"><?php echo $row["descripcion"]; ?>
-                            <hr>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                        <span class="ti-check-box"></span>
-                        <span class="custom-control-description">Bike Parking</span>
-                      </label> </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                       <span class="ti-check-box"></span>
-                       <span class="custom-control-description">Wireless Internet  </span>
-                     </label>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                     <span class="ti-check-box"></span>
-                     <span class="custom-control-description">Smoking Allowed  </span>
-                   </label> </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                    <span class="ti-check-box"></span>
-                    <span class="custom-control-description">Street Parking</span>
-                  </label>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                   <span class="ti-check-box"></span>
-                   <span class="custom-control-description">Special</span>
-                 </label> </div>
-                            <div class="col-md-4">
-                                <label class="custom-checkbox">
-                  <span class="ti-check-box"></span>
-                  <span class="custom-control-description">Accepts Credit cards</span>
-                </label>
-                            </div>
-							 <div class="col-md-4">
-                                <label class="custom-checkbox">
-                       <span class="ti-check-box"></span>
-                       <span class="custom-control-description">Radio</span>
-                     </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-md-4 responsive-wrap">
-                    <div class="contact-info">
-                        
+                             <td align="center"><?php echo $row["descripcion"]; ?></td> 
+                
+                       
                         <div class="address">
                             <span class="icon-location-pin"></span>
-                            <p> Doyers St<br> New York, NY 10013<br> b/t Division St & St James Pl <br> Chinatown, Civic Center</p>
+                            <a align="center"<?php echo $row["ubicacion"]; ?>">Ubicación</a>
                         </div>
                         <div class="address">
                             <span class="icon-screen-smartphone"></span>
-                            <p> +44 20 7336 8898</p>
-                        </div>
-                        <div class="address">
-                            <span class="icon-link"></span>
-                            <p>https://burgerandlobster.com</p>
-                        </div>                   
+                            <p>+34652395778</p>
+                        </div>                 
                     </div>
                     
                 </div>
@@ -190,11 +167,14 @@ $row = mysqli_fetch_assoc($result);
             <div class="row">
                 <div class="col-md-12">
                     <div class="copyright">
-                        <p>Copyright &copy; 2018 Listing. All rights reserved | This template is made with by <a  target="_blank">Diego Abdul y Zoran Cerrillo</a></p>
+                        <p>Esta aplicación fue realizada por Diego Abdul y Zoran Cerrillo, derechos reservados &copy;</a></p>
                         <ul>
-                            <li><a href="#"><span class="ti-facebook"></span></a></li>
-                            <li><a href="#"><span class="ti-twitter-alt"></span></a></li>
-                            <li><a href="#"><span class="ti-instagram"></span></a></li>
+                            <p>Diego Abdul</p>
+                            <li><a href="https://www.linkedin.com/in/diego-abdul-massih-lopez-b4867316a/" target=”_blank”><span class="ti-linkedin"></span></a></li>
+                            <li><a href="https://www.instagram.com/diegoabdul/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                            <br>
+                            <p>Zoran Cerrillo</p>
+                            <li><a href="https://www.instagram.com/zorancerrillo9/" target=”_blank”><span class="ti-instagram" ></span></a></li>
                         </ul>
                     </div>
                 </div>

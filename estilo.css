@@ -1,0 +1,14 @@
+#map {
+	height: 600px;
+	width: 100%;
+}
+.titulo {
+	color:blue;
+}
+table{
+	width:90%;
+	text-align: center;
+}
+tr, td, th {
+	border: 1px solid black;
+}

@@ -1,0 +1,23 @@
+				Javier Sánchez Soriano  -  04/12/2018
+
+______________________________INSTRUCCIONES______________________________
+
+1. Colocar el contenido de la carpeta dentro de nuestro servidor Apache (Para
+	que pueda ejecutar los script de php.
+	
+2. Crear la bbdd "coordenadas" mediante el uso del script coordenadas.sql.
+
+3. Modificar los datos de conexión a la bbdd de acuerdo al servidor de BBDD que
+	tengamos instalados (como ya se hizo en otras actividades). 
+	Esto se hace en el fichero db.php.
+	
+$con = mysqli_connect("localhost","root","","coordenadas");
+$con = mysqli_connect("localhost:3306","root","","coordenadas");
+$con = mysqli_connect("localhost:3306","root","root","coordenadas");
+...
+
+4. Acceder al contenido vía navegador: 
+
+localhost/carpetas.../mapas
+localhost:8080/carpetas.../mapas
+...

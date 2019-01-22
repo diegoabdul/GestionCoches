@@ -1,7 +1,27 @@
 <?php
 require('db.php');
+$status = "";
+if(isset($_POST['new']) && $_POST['new']==1){
+    $trn_date = date("Y-m-d H:i:s");
+    $name =$_REQUEST['name'];
+    $email =$_REQUEST['email'];
+    $subject = $_REQUEST['subject'];
+    $message = $_REQUEST['message'];
+    $phone =$_REQUEST['phone'];
+
+  $ins_query="insert into contact
+    (`name`,`email`,`telefono`,`subject`,`message`)values
+    ('$name','$email','$phone','$subject','$message')";
+    mysqli_query($con,$ins_query)
+    or die(mysql_error());
+    
+    $status = "Correctamente Insertado.
+    </br></br><a href='view.php'>View Inserted Record</a>";
+}
 ?>
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -66,30 +86,23 @@ require('db.php');
     </div>
 
         <div class="card-body">
-      <form class="card-body" method="POST">
+       <form enctype="multipart/form-data" name="form" method="post" action=""> 
+                        <input type="hidden" name="new" value="1" />
         <h2 class="form-row">Contacta con Coches Caracas</h2>
-        <label for="inputName" class="sr-only">Name</label>
+        <label for="inputName" class="sr-only">Nombre</label>
           <input type="name" name="name" id="inputName" class="form-control" placeholder="Nombre" required>
         <label for="inputEmail" class="sr-only">E-Mail</label>
           <input type="email" name="email" id="inputEmail" class="form-control" placeholder="nombre@email.com" required>
-        <label for="inputSubject" class="sr-only">Subject</label>
-          <input type="name" name="subject" id="inputSubject" class="form-control" placeholder="Asunto" required>
-        <label for="inputMessage" class="sr-only" >Message</label>
-        <textarea class="form-control" id="inputMessage" rows="3"placeholder="Introduzca su mensaje, si le gusto algun coche indique tambien el modelo."></textarea>
+        <label for="inputSubject" class="sr-only">Asunto</label>
+          <input type="message" name="subject" id="inputSubject" class="form-control" placeholder="Asunto" required>
+          <label for="inputSubject" class="sr-only">Telefono</label>
+          <input type="number" name="phone" id="inputNumber" class="form-control" placeholder="Telefono" required>
+        <label for="inputMessage" class="sr-only" >Mensaje</label>
+        <textarea class="form-control" name="message" id="inputMessage" rows="3"placeholder="Introduzca su mensaje, si le gusto algun coche indique tambien el modelo."></textarea>
         <button class="btn" type="submit">Enviar</button>
       </form>
       </div>
-      <?php
-      if((isset($_POST['name']) && !empty($_POST['name']))
-&& (isset($_POST['email']) && !empty($_POST['email']))
-&& (isset($_POST['subject']) && !empty($_POST['subject']))){
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $subject = $_POST['subject'];
- 
-  
-  }
-?>
+      
 
 
 <!-- Jquery JS-->
@@ -110,4 +123,23 @@ require('db.php');
     </div>
   </form>
 </body>
+<footer class="main-block dark-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Esta aplicación fue realizada por Diego Abdul y Zoran Cerrillo, derechos reservados &copy;</a></p>
+                        <ul>
+                            <p>Diego Abdul</p>
+                            <li><a href="https://www.linkedin.com/in/diego-abdul-massih-lopez-b4867316a/" target=”_blank”><span class="ti-linkedin"></span></a></li>
+                            <li><a href="https://www.instagram.com/diegoabdul/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                            <br>
+                            <p>Zoran Cerrillo</p>
+                            <li><a href="https://www.instagram.com/zorancerrillo9/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
   </html>

@@ -67,7 +67,6 @@
     </div>
     <!-- SLIDER -->
     <section class="slider d-flex align-items-center">
-        <!-- <img src="images/slider.jpg" class="img-fluid" alt="#"> -->
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12">
@@ -75,7 +74,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="slider-content_wrap">
-                                    <h1>Los mejores coches de España</h1>
+                                    <img src="images/diego.jpg" style="height: 10%" width="10%" class="rounded-circle">
+                                    <img src="images/zoran.jpg" style="height: 10%" width="10%" class="rounded-circle" >
+                                    <h3 class="text-muted">Somos estudiantes de la Universidad Europea de Madrid, estamos en el tercer año de Ingeniería Informática y este es nuestro Gestor de Coches, el cual le permitiría a un concesionario de coches gestionar toda la flota que maneja fácilmente y sin softwares costosos, Bienvenido.</h3>
                                     
                                 </div>
                             </div>
@@ -89,6 +90,26 @@
         </div>
     </section>
     
+    <footer class="main-block dark-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Esta aplicación fue realizada por Diego Abdul y Zoran Cerrillo, derechos reservados &copy;</a></p>
+                        <ul>
+                            <p>Diego Abdul</p>
+                            <li><a href="https://www.linkedin.com/in/diego-abdul-massih-lopez-b4867316a/" target=”_blank”><span class="ti-linkedin"></span></a></li>
+                            <li><a href="https://www.instagram.com/diegoabdul/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                            <br>
+                            <p>Zoran Cerrillo</p>
+                            <li><a href="https://www.instagram.com/zorancerrillo9/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--//END FOOTER -->
 
 
 
@@ -115,23 +136,5 @@
         });
     </script>
 </body>
-<footer class="main-block dark-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="copyright">
-                        <p>Esta aplicación fue realizada por Diego Abdul y Zoran Cerrillo, derechos reservados &copy;</a></p>
-                        <ul>
-                            <p>Diego Abdul</p>
-                            <li><a href="https://www.linkedin.com/in/diego-abdul-massih-lopez-b4867316a/" target=”_blank”><span class="ti-linkedin"></span></a></li>
-                            <li><a href="https://www.instagram.com/diegoabdul/" target=”_blank”><span class="ti-instagram" ></span></a></li>
-                            <br>
-                            <p>Zoran Cerrillo</p>
-                            <li><a href="https://www.instagram.com/zorancerrillo9/" target=”_blank”><span class="ti-instagram" ></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 </html>

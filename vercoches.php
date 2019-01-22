@@ -32,9 +32,25 @@ $row2 = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/set1.css">
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Librerías para usar Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+    crossorigin=""></script>
+
+    <!-- Librerías para usar Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Librerías propias -->  
+    <script src="scripts.js"></script>
 </head>
 
 <body>
+
 <div class="dark-bg sticky-top">
         <div class="container-fluid">
             <div class="row">
@@ -72,14 +88,14 @@ $row2 = mysqli_fetch_assoc($result);
             </div>
         </div>
     </div>
-<div style="width: 55%" style="height: 50%">
-                    <div class="map-fix">                
- <iframe src="https://www.google.com/maps/embed?pb=<?php echo $row2["ubicacion"]; ?>" width="95%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    </div>
-
+    <div class="map-fix" >
+         <div id="map"></div>
+       </div>
+<div style="width: 55%" style="height: 55%">
+            
 <div class="table-responsive">
 
-<table class="table table-striped">
+<table  class="table table-striped">
 <thead>
 <tr>
 <th><strong>Imagen</strong></th>
@@ -97,14 +113,16 @@ $result = mysqli_query($con,$sel_query);
 while($row = mysqli_fetch_assoc($result)) { ?>
 
 
-<td align="center" height="25%" width="25%"><?php echo '<img height="100%" width="100%" src="data:image/jpeg;base64,'.base64_encode( $row['imagen'] ).'"/>'?></td>
+<td align="center" class="table-responsive"><?php echo '<img height="100%" width="100%" src="data:image/jpeg;base64,'.base64_encode( $row['imagen'] ).'"/>'?></td>
 
 <td align="center"><?php echo $row["marca"]; ?></td>
-<td align="center"><?php echo $row["ano"]; ?></td>
+<td align="center" ><?php echo $row["ano"]; ?></td>
 <td align="center"><?php echo $row["precio"]; ?></td>
 <td align="center">
 <a href="detail.php?id=<?php echo $row["id"]; ?>">View</a>
-<a href="vercoches.php?id=<?php echo $row["id"]; ?>">Ubicación</a>
+<a align="center"<?php echo $row["ubicacion"]; ?>">Ubicación</a>
+<span class="icon-location-pin"></span>
+
 </td>
 </tr>
 <?php $count++; } ?>
@@ -118,38 +136,26 @@ while($row = mysqli_fetch_assoc($result)) { ?>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    </script>
-     <script>
-        $(".map-icon").click(function() {
-            $(".map-fix").toggle();
-        });
-    </script>
-    <script>
-        // Want to customize colors? go to snazzymaps.com
-        function myMap() {
-            var maplat = $('#map').data('lat');
-            var maplon = $('#map').data('lon');
-            var mapzoom = $('#map').data('zoom');
-            // Styles a map in night mode.
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: maplat,
-                    lng: maplon
-                },
-                zoom: mapzoom,
-                scrollwheel: false
-            });
-            var marker = new google.maps.Marker({
-                position: {
-                    lat: maplat,
-                    lng: maplon
-                },
-                map: map,
-                title: 'We are here!'
-            });
-        }
-    </script>
-
+    
    
 </body>
+<footer class="main-block dark-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Esta aplicación fue realizada por Diego Abdul y Zoran Cerrillo, derechos reservados &copy;</a></p>
+                        <ul>
+                            <p>Diego Abdul</p>
+                            <li><a href="https://www.linkedin.com/in/diego-abdul-massih-lopez-b4867316a/" target=”_blank”><span class="ti-linkedin"></span></a></li>
+                            <li><a href="https://www.instagram.com/diegoabdul/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                            <br>
+                            <p>Zoran Cerrillo</p>
+                            <li><a href="https://www.instagram.com/zorancerrillo9/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </html>

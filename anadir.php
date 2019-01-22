@@ -9,25 +9,23 @@ if(isset($_POST['new']) && $_POST['new']==1){
 	$descripcion =$_REQUEST['descripcion'];
     $ano = $_REQUEST['ano'];
     $precio = $_REQUEST['precio'];
-
+    $Latitud =$_REQUEST['Latitud'];
+    $Longitud =$_REQUEST['Longitud'];
+    $Ubicacion = "onclick=\"ver(".$Latitud.",".$Longitud.");";
     if ($_FILES["file"]["error"] > 0) {
     echo "Error: " . $_FILES["file"]["error"] . "<br />";
 }
 else {
-    echo "Subiste: " . $_FILES["file"]["name"] . "<br />";
-    echo "Tipo de archivo: " . $_FILES["file"]["type"] . "<br />";
-    echo "Tamaño: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
-    echo "Almacenado en: " . $_FILES["file"]["tmp_name"];
     $contenidoImagen = file_get_contents($_FILES["file"]["tmp_name"]);
     $imagenBase64 = addslashes($contenidoImagen);
 }
     $submittedby = $_SESSION["username"];
     $ins_query="insert into new_record
-    (`trn_date`,`marca`,`descripcion`,`ano`,`precio`,`imagen`,`submittedby`)values
-    ('$trn_date','$marca','$descripcion','$ano','$precio','$imagenBase64','$submittedby')";
+    (`trn_date`,`marca`,`descripcion`,`ano`,`precio`,`imagen`,`ubicacion`,`submittedby`)values
+    ('$trn_date','$marca','$descripcion','$ano','$precio','$imagenBase64','$Ubicacion','$submittedby')";
     mysqli_query($con,$ins_query)
     or die(mysql_error());
-    $status = "New Record Inserted Successfully.
+    $status = "Correctamente Añadido.
     </br></br><a href='view.php'>View Inserted Record</a>";
 }
 ?>
@@ -73,6 +71,21 @@ else {
     <link rel="stylesheet" href="css/set1.css">
     <!-- Main CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Librerías para usar Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+    crossorigin=""></script>
+
+    <!-- Librerías para usar Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Librerías propias -->  
+    <script src="scripts.js"></script>
 </head>
 
 <body>
@@ -111,20 +124,23 @@ else {
             </div>
         </div>
     </div>
-                <div class="card-body">
+    <div class="map-fix" >
+         <div id="map"></div>
+       </div>
+                <div style="width: 55%" style="height: 55%" class="card-body">
                     <form enctype="multipart/form-data" name="form" method="post" action=""> 
                         <input type="hidden" name="new" value="1" />
                         <div class="form-row">
                             <div class="name">Marca - Modelo</div>
                             <div class="value">
-                                <input class="input--style-6" type="text" name="marca"placeholder="Marca - Modelo" required>
+                                <input maxlength="30" class="input--style-6" type="text" name="marca"placeholder="Marca - Modelo" required>
                             </div>
                         </div>
 						<div class="form-row">
                             <div class="name">Descripcion</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-6" type="text" name="descripcion" placeholder="Descripcion" required>
+                                    <input maxlength="40" class="input--style-6" type="text" name="descripcion" placeholder="Descripcion" required>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +148,7 @@ else {
                             <div class="name">Precio</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-6" type="text" name="precio" placeholder="Precio" required>
+                                    <input maxlength="5" class="input--style-6" type="text" name="precio" placeholder="Precio" required>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +156,7 @@ else {
                             <div class="name">Año</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-6" type="text" name="ano" placeholder="Año" required>
+                                    <input maxlength="4" class="input--style-6" type="date" name="ano" placeholder="Año" required>
                                 </div>
                             </div>
                         </div>
@@ -148,17 +164,28 @@ else {
                             <div class="name">Imagen</div>
                             <div class="value">
                                 <div class="input-group js-input-file">
-                                    <input type="file" name="file" id="file"/><br><br>
+                                    <input type="file" name="file" id="file" required>
                                 </div>
                                 <div class="label--desc"></div>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="name">Ubicacion</div>
+                            <div class="value">
+                                        <input type="text" name="Latitud" id="Latitud" required> Latitud<br>
+                                        <input type="text" name="Longitud" id="Longitud" required> Longitud<br>
+                                </div>
+                                <div class="label--desc"></div>
+                            </div>
+                        </div>
+
                         <button class="btn btn--radius-2 btn--blue-2" type="submit" value="Upload">Añadir</button>
-                
+                        
                     </form>
+
                     <p style="color:#FF0000;"><?php echo $status; ?></p>
                 </div>
-
+                
                     
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -172,8 +199,25 @@ else {
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     </script>
-     
 </body>
-
+<footer class="main-block dark-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Esta aplicación fue realizada por Diego Abdul y Zoran Cerrillo, derechos reservados &copy;</a></p>
+                        <ul>
+                            <p>Diego Abdul</p>
+                            <li><a href="https://www.linkedin.com/in/diego-abdul-massih-lopez-b4867316a/" target=”_blank”><span class="ti-linkedin"></span></a></li>
+                            <li><a href="https://www.instagram.com/diegoabdul/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                            <br>
+                            <p>Zoran Cerrillo</p>
+                            <li><a href="https://www.instagram.com/zorancerrillo9/" target=”_blank”><span class="ti-instagram" ></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </html>
 <!-- end document-->
