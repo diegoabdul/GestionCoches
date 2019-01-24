@@ -1,8 +1,12 @@
-
 <?php
 // Enter your Host, username, password, database below.
 // I left password empty because i do not set password on localhost.
-$con = mysqli_connect("localhost","root","","register");
+$servername = "localhost";
+$database = "aqrrvhvs_register";
+$username = "aqrrvhvs_diego";
+$password = "Galicia96.";
+// Create connection
+$con = mysqli_connect($servername, $username, $password, $database);
 // Check connection
 if (mysqli_connect_errno())
   {

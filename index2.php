@@ -28,6 +28,7 @@
 <body>
     <?php
 require('db.php');
+require('auth.php');
 session_start();
     ?>
     <!--============================= HEADER =============================-->

@@ -90,7 +90,7 @@ include("auth.php");
 <tr>
 <th><strong>Imagen</strong></th>
 <th><strong>Marca - Modelo</strong></th>
-<th><strong>Año</strong></th>
+<th><strong>Matriculación</strong></th>
 <th><strong>Precio €</strong></th>
 <th><strong>Opciones</strong></th>
 </tr>
@@ -111,8 +111,7 @@ while($row = mysqli_fetch_assoc($result)) { ?>
 <td align="center"><?php echo $row["precio"]; ?></td>
 <td align="center">
 <a href="detail.php?id=<?php echo $row["id"]; ?>">View</a>
-<a align="center"<?php echo $row["ubicacion"]; ?>">Ubicación</a>
-<span class="icon-location-pin"></span>
+<a align="center"<?php echo $row["ubicacion"]; ?>"><span style="font-size:180%" class="icon-location-pin"></span></a>
 <a href="editar.php?id=<?php echo $row["id"]; ?>">Edit</a>
 <a href="delete.php?id=<?php echo $row["id"]; ?>">Delete</a>
 
